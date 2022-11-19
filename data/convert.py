@@ -11,7 +11,7 @@ def main():
 
     with open(output_file_path, 'w') as f:
         for word in five_letter_words:
-            f.write(word + '\n')
+            f.write(word.upper() + '\n')
     print(f'Found {len(five_letter_words)} five_letter words')
 
 
