@@ -25,13 +25,18 @@ def main():
 def display_results(wordle: Wordle):
     print('Your results so far:')
     print(f'You have {wordle.remaining_attempts} attempts remaining\n')
+
+    lines = []
+
     for word in wordle.attempts:
         result = wordle.guess(word)
         colored_result_str = convert_result_to_color(result)
-        print(colored_result_str)
+        lines.append(colored_result_str)
 
     for _ in range(wordle.remaining_attempts):
-        print(' '.join(['_'] * wordle.WORD_LENGTH))
+        lines.append(' '.join(['_'] * wordle.WORD_LENGTH))
+
+    draw_border_around(lines)
 
 def convert_result_to_color(result: List[LetterState]):
     result_with_color = []
@@ -45,6 +50,20 @@ def convert_result_to_color(result: List[LetterState]):
         colored_letter = color + letter.character + Fore.RESET
         result_with_color.append(colored_letter)
     return ' '.join(result_with_color)
+
+def draw_border_around(lines: List[str], size: int = 9, pad: int = 1):
+
+    content_length = size + pad * 2
+    top_border = "┌" + "─" * content_length + "┐"
+    bottom_border = "└" + "─" * content_length + "┘"
+    space = " " * pad
+    print(top_border)
+
+    for line in lines:
+        print("│" + space + line + space + "│")
+
+    print(bottom_border)
+
 
 if __name__ == '__main__':
     main()
