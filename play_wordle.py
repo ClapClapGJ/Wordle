@@ -22,7 +22,7 @@ def main():
             )
             continue
 
-        if not x in word_set:
+        if not x.upper() in word_set:
             print(
                 Fore.RED
                 + f"{x} is not a valid word!"
